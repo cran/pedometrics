@@ -2,6 +2,51 @@
 
 \title{News for Package \pkg{pedometrics}}
 
+\section{Changes in version 0.3-0 (2014-11-15)}{
+  \itemize{
+    \item Started the third season of the initial development of the package.
+    Significant changes were made in functions spSANN(), spJitter(), and those
+    used as objective functions in spatial simulated annealing.
+  }
+}
+
+\section{Changes in version 0.2-4 (2014-10-07)}{
+  \itemize{
+    \item Spatial simulated annealing is now available: spSANN().
+  }
+}
+
+\section{Changes in version 0.2-3 (2014-10-07)}{
+  \itemize{
+    \item Corrected bugs in functions objPairs(), objPoints(), pairs_per_lag(),
+    points_per_lag() and spJitter(). Added new criterion to objPairs() and
+    objPoints(). Added new method to spJitter() (finite set of candidate
+    locations). Most of the changes speed up the functions and increase
+    their functionalities.
+  }
+}
+
+\section{Changes in version 0.2-2 (2014-10-02)}{
+  \itemize{
+    \item Included functions objPairs(), objPoints(), pairs_per_lag() and 
+    points_per_lag(). These functions were designed to be used with spatial
+    simulated annealing.
+  }
+}
+
+\section{Changes in version 0.2-1 (2014-09-30)}{
+  \itemize{
+    \item Included functions spJitter() and bbox2sp().
+  }
+}
+
+\section{Changes in version 0.2-0 (2014-09-25)}{
+  \itemize{
+    \item Started the second season of the initial development of the package.
+    Included functions plotHD() and plotESDA().
+  }
+}
+
 \section{Changes in version 0.1-9 (2014-08-01)}{
   \itemize{
     \item Removed \code{toar()} and \code{readsat()} because they are better
