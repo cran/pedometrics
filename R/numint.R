@@ -12,25 +12,33 @@
 #' \code{\link[base]{is.factor}}.
 #' 
 #' @author Alessandro Samuel-Rosa \email{alessandrosamuelrosa@@gmail.com}
-#' @aliases is.numint is.all.numint is.all.integer is.all.factor is.any.factor
-#' is.all.numeric is.one.type
-#' @export
+#' @aliases isNumint allNumint anyNumint allInteger anyInteger allFactor
+#' anyFactor allNumeric anyNumeric uniqueClass
 #' @examples
 #' # Vector of integers
 #' x <- 1:10
-#' is.numint(x) # FALSE
+#' isNumint(x) # FALSE
+#' 
 #' # Vector of numeric integers
 #' x <- as.numeric(x)
-#' is.numint(x) # TRUE
+#' isNumint(x) # TRUE
+#' 
 #' # Vector of numeric values
-#' x <- c(1.1, 1, 1, 1, 2) # FALSE
-#' is.numint(x)
+#' x <- c(1.1, 1, 1, 1, 2)
+#' isNumint(x) # FALSE
+#' allNumint(x) # FALSE
+#' anyNumint(x) # TRUE
+#' whichNumint(x)
+#' 
 #' # Single numeric integer
-#' is.numint(1) # TRUE
+#' isNumint(1) # TRUE
+#' 
 #' # Single numeric value
-#' is.numint(1.1) # FALSE
-# FUNCTION - IS NUMERIC INTEGER? ###############################################
-is.numint <-
+#' isNumint(1.1) # FALSE
+# FUNCTION - NUMERIC INTEGERS ##################################################
+#' @rdname numint
+#' @export
+isNumint <-
   function (x) {
     if (is.integer(x) || is.factor(x) || is.character(x)) return (FALSE)
     if (is.numeric(x) && length(x) > 1) {
@@ -41,55 +49,109 @@ is.numint <-
     }
     return (res)
   }
-# FUNCTION - ARE ALL NUMERIC INTEGERS? #########################################
-#' @rdname is.numint
+#' @rdname numint
 #' @export
-is.all.numint <-
+allNumint <-
   function (x) {
-    res <- sapply(x, is.numint)
+    res <- sapply(x, pedometrics::isNumint)
     res <- all(res == TRUE)
     return (res)
   }
-# FUNCTION - ARE ALL INTEGERS? #################################################
-#' @rdname is.numint
+#' @rdname numint
 #' @export
-is.all.integer <-
+anyNumint <-
+  function (x) {
+    res <- sapply(x, pedometrics::isNumint)
+    res <- any(res == TRUE)
+    return (res)
+  }
+#' @rdname numint
+#' @export
+whichNumint <-
+  function (x) {
+    res <- sapply(x, pedometrics::isNumint)
+    res <- which(res == TRUE)
+    return (res)
+  }
+# FUNCTION - INTEGERS ##########################################################
+#' @rdname numint
+#' @export
+allInteger <-
   function (x) {
     res <- sapply(x, is.integer)
     res <- all(res == TRUE)
     return (res)
   }
-# FUNCTION - ARE ALL FACTORS? ##################################################
-#' @rdname is.numint
+#' @rdname numint
 #' @export
-is.all.factor <-
+anyInteger <-
+  function (x) {
+    res <- sapply(x, is.integer)
+    res <- any(res == TRUE)
+    return (res)
+  }
+#' @rdname numint
+#' @export
+whichInteger <-
+  function (x) {
+    res <- sapply(x, is.integer)
+    res <- which(res == TRUE)
+    return (res)
+  }
+# FUNCTION - FACTORS ###########################################################
+#' @rdname numint
+#' @export
+allFactor <-
   function (x) {
     res <- sapply(x, is.factor)
     res <- all(res == TRUE)
     return (res)
   }
-# FUNCTION - IS ANY FACTOR? ####################################################
-#' @rdname is.numint
+#' @rdname numint
 #' @export
-is.any.factor <-
+anyFactor <-
   function (x) {
     res <- sapply(x, is.factor)
     res <- any(res == TRUE)
     return (res)
   }
-# FUNCTION - ARE ALL NUMERIC ###################################################
-#' @rdname is.numint
+#' @rdname numint
 #' @export
-is.all.numeric <-
+whichFactor <-
+  function (x) {
+    res <- sapply(x, is.factor)
+    res <- which(res == TRUE)
+    return (res)
+  }
+# FUNCTION - NUMERIC ###########################################################
+#' @rdname numint
+#' @export
+allNumeric <-
   function (x) {
     res <- sapply(x, is.numeric)
     res <- all(res == TRUE)
     return (res)
   }
-# FUNCTION - IS ONE TYPE #######################################################
-#' @rdname is.numint
+#' @rdname numint
 #' @export
-is.one.type <-
+anyNumeric <-
+  function (x) {
+    res <- sapply(x, is.numeric)
+    res <- any(res == TRUE)
+    return (res)
+  }
+#' @rdname numint
+#' @export
+whichNumeric <-
+  function (x) {
+    res <- sapply(x, is.numeric)
+    res <- which(res == TRUE)
+    return (res)
+  }
+# FUNCTION - IS ONE TYPE #######################################################
+#' @rdname numint
+#' @export
+uniqueClass <-
   function (x) {
     res <- sapply(x, class)
     res <- length(unique(res))

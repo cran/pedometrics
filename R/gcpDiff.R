@@ -1,18 +1,3 @@
-#  file pedometrics/R/gcpDiff.R
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 or 3 of the License
-#  (at your option).
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  A copy of the GNU General Public License is available at
-#  http://www.r-project.org/Licenses/
-#
 #' Diffence on xyz coordinates between ground control points
 #' 
 #' This function estimates the difference, absolute difference, and squared
@@ -70,12 +55,12 @@
 #' error statistics will have no meaning at all.
 #' }
 #' 
-#' @param measured Object of class \code{\linkS4class{SpatialPointsDataFrame}}
+#' @param measured Object of class \code{SpatialPointsDataFrame}
 #' with the reference GCP. A column named \sQuote{siteID} giving case names is
 #' mandatory. See \sQuote{Details}, item \sQuote{Type of data}.
 #' 
 #' @param predicted An object of class
-#' \code{\linkS4class{SpatialPointsDataFrame}} with the point data being
+#' \code{SpatialPointsDataFrame} with the point data being
 #' validated. A column named \sQuote{siteID} giving case names is mandatory.
 #' See \sQuote{Details}, item \sQuote{Type of data}.
 #' 

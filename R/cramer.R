@@ -31,7 +31,6 @@
 #' Cambridge University Press, p. 432, 2006.
 #' 
 #' @seealso \code{\link[vcd]{assocstats}}
-# @import bigtabulate
 #' @export
 #' @examples
 #' data <- read.csv("http://www.math.smith.edu/r/data/help.csv")
@@ -85,6 +84,7 @@ cramer <-
     EXPECTED <- outer(sr, sc, "*") / n
     #YATES <- 0
     #STATISTIC <- sum((abs(OBSERVED - EXPECTED) - YATES) ^ 2 / EXPECTED)
-    STATISTIC <- sum(abs(OBSERVED - EXPECTED) ^ 2 / EXPECTED)
+    #STATISTIC <- sum(abs(OBSERVED - EXPECTED) ^ 2 / EXPECTED)
+    STATISTIC <- sum(abs(OBSERVED - EXPECTED) ^ 2 / EXPECTED, na.rm = TRUE)
     return (STATISTIC)
   }
