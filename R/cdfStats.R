@@ -1,5 +1,5 @@
 #' Descriptive statistics of the cumulative distribution function of a
-#' continuos variable
+#' continuous variable
 #' 
 #' This function returns summary statistics of the cumulative distribution
 #' function of a continuous variable estimated with \pkg{spsurvey}-package.
@@ -35,7 +35,7 @@
 #' 
 #' \dontrun{
 #' ## Estimate the CDF
-#' my.cdf <- cont.analysis(spsurvey.obj = my.spsurvey)
+#' my.cdf <- spsurvey::cont.analysis(spsurvey.obj = my.spsurvey)
 #' 
 #' ## See indicator levels in the resulting object
 #' levels(my.cdf$Pct$Indicator)
