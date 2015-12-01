@@ -1,6 +1,6 @@
 Package: pedometrics
-Version: 0.6-4
-Date: 2015-11-28
+Version: 0.6-5
+Date: 2015-11-30
 Title: Pedometric Tools and Techniques
 Description: Functions to employ many of the tools and techniques used in the 
     field of pedometrics.
@@ -36,8 +36,8 @@ Authors@R: c(
            )
 URL: https://github.com/samuel-rosa/pedometrics
 BugReports: https://github.com/samuel-rosa/pedometrics/issues
-Depends: R (>= 1.8.0)
-Imports: lattice, latticeExtra, Rcpp (>= 0.11.0)
+Depends: R (>= 3.2.0)
+Imports: lattice, latticeExtra, Rcpp (>= 0.12.0)
 LinkingTo: Rcpp
 Suggests: car, georob, grDevices, grid, gstat, MASS, methods, moments,
         pbapply, plyr, randomForest, sp, SpatialTools, spsurvey, xtable
@@ -46,7 +46,7 @@ Encoding: UTF-8
 Repository: CRAN
 RoxygenNote: 5.0.1
 NeedsCompilation: yes
-Packaged: 2015-11-28 22:06:29 UTC; alessandro
+Packaged: 2015-11-30 18:47:43 UTC; alessandro
 Author: Alessandro Samuel-Rosa [aut, cre],
   Lúcia Anjos [ths],
   Gustavo Vasques [ths],
@@ -62,4 +62,4 @@ Author: Alessandro Samuel-Rosa [aut, cre],
   Frank Harrell Jr [ctb],
   Ruo Xu [ctb]
 Maintainer: Alessandro Samuel-Rosa <alessandrosamuelrosa@gmail.com>
-Date/Publication: 2015-11-28 23:19:37
+Date/Publication: 2015-12-01 08:14:10

@@ -1,4 +1,4 @@
-64ef346c70a969a9ee8fa0d7ca84b340 *DESCRIPTION
+69e5fcc896995a7fa24f2b36f4e81462 *DESCRIPTION
 c692b008485af9b6bd08b49db004f211 *NAMESPACE
 1cd9251d91f48c830698c06eebd788c0 *R/AAAA.R
 f2afe2fa99ef5ae71095d865536093f9 *R/RcppExports.R
@@ -16,7 +16,7 @@ c5c61cda1defb71764fd8e491b004ba4 *R/cont2cat.R
 b48d9566584fadf51841dab036c65c7e *R/gcpVector.R
 d2537e72abe49ae20e531ede917c44db *R/numint.R
 02c4c333922e8c0f1243a4df3ed22780 *R/optimRandomForest.R
-d075252d6ce9a780f6c6568dc07e128d *R/pedometrics.R
+013c694fbdbc0a166c6e79fd35e4e0e0 *R/pedometrics.R
 364233bef8f2248fe77add6c7533ce43 *R/plotESDA.R
 91ddef3cb559e8f82f521ce4da5a0acf *R/plotHD.R
 ef6c0158e5aab38785257e77efc35c88 *R/plotMS.R
@@ -24,7 +24,7 @@ ef6c0158e5aab38785257e77efc35c88 *R/plotMS.R
 4905177e186eef802a1ea819b69b3355 *R/stepVIF.R
 090902c456af5047fe659649184f5f31 *R/trend.R
 4cd9f5db9c065a4998fd8050601adbe4 *R/vgmICP.R
-40140c942e169a398b24862db6bb1524 *R/vgmLags.R
+6b2c79f6dd62296f5a90b9464a85f435 *R/vgmLags.R
 893dc5aded1f87253f7add357a79b8e4 *R/vgmSCV.R
 27c53670840816620f564546e86018ab *man/adjR2.Rd
 c3cdef7fc31e673313e7f50c06e574a4 *man/bbox2sp.Rd
@@ -40,7 +40,7 @@ a9fc293a219159e48f431ec164e8e789 *man/cramer.Rd
 3fcfec157f3db098f8da446fac68b41c *man/gcpVector.Rd
 8b5ae961b2e6a75cc97931338c557f16 *man/numint.Rd
 4a79ba80040dcfd053595cc2a3c8c6d1 *man/optimRandomForest.Rd
-4160391c054685abdd1a0c1bd541cc2a *man/pedometrics-package.Rd
+e90ce9c6d54f59811f3e2a1de57f542e *man/pedometrics-package.Rd
 69b9b9b0a420426279a69c8deb184fef *man/plotESDA.Rd
 46f2875314f8fa18b8aaea2924cef257 *man/plotHD.Rd
 078051834864824a6c1ba3319d8bf431 *man/plotMS.Rd
