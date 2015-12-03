@@ -1,6 +1,6 @@
-69e5fcc896995a7fa24f2b36f4e81462 *DESCRIPTION
+563e822b8ddabee1dedbd4343d7fe1df *DESCRIPTION
 c692b008485af9b6bd08b49db004f211 *NAMESPACE
-1cd9251d91f48c830698c06eebd788c0 *R/AAAA.R
+9d391805a9f61fdc0fffb52f1ca04662 *R/AAAA.R
 f2afe2fa99ef5ae71095d865536093f9 *R/RcppExports.R
 ca67ae3dbb03ad8faf49654086684d07 *R/adjR2.R
 66550757536bd2bd312f7c7c380b4ed6 *R/bbox2sp.R
@@ -16,14 +16,14 @@ c5c61cda1defb71764fd8e491b004ba4 *R/cont2cat.R
 b48d9566584fadf51841dab036c65c7e *R/gcpVector.R
 d2537e72abe49ae20e531ede917c44db *R/numint.R
 02c4c333922e8c0f1243a4df3ed22780 *R/optimRandomForest.R
-013c694fbdbc0a166c6e79fd35e4e0e0 *R/pedometrics.R
+9197713b4a1fca1b47faf5c3281ae9bc *R/pedometrics.R
 364233bef8f2248fe77add6c7533ce43 *R/plotESDA.R
 91ddef3cb559e8f82f521ce4da5a0acf *R/plotHD.R
 ef6c0158e5aab38785257e77efc35c88 *R/plotMS.R
 82ab395285fd3b6b646ba01815dca422 *R/statsMS.R
 4905177e186eef802a1ea819b69b3355 *R/stepVIF.R
 090902c456af5047fe659649184f5f31 *R/trend.R
-4cd9f5db9c065a4998fd8050601adbe4 *R/vgmICP.R
+b4f2704a1be57aa34ab7d520ad0b5239 *R/vgmICP.R
 6b2c79f6dd62296f5a90b9464a85f435 *R/vgmLags.R
 893dc5aded1f87253f7add357a79b8e4 *R/vgmSCV.R
 27c53670840816620f564546e86018ab *man/adjR2.Rd
@@ -40,7 +40,7 @@ a9fc293a219159e48f431ec164e8e789 *man/cramer.Rd
 3fcfec157f3db098f8da446fac68b41c *man/gcpVector.Rd
 8b5ae961b2e6a75cc97931338c557f16 *man/numint.Rd
 4a79ba80040dcfd053595cc2a3c8c6d1 *man/optimRandomForest.Rd
-e90ce9c6d54f59811f3e2a1de57f542e *man/pedometrics-package.Rd
+e323464203c4e4545660e085e5d94594 *man/pedometrics-package.Rd
 69b9b9b0a420426279a69c8deb184fef *man/plotESDA.Rd
 46f2875314f8fa18b8aaea2924cef257 *man/plotHD.Rd
 078051834864824a6c1ba3319d8bf431 *man/plotMS.Rd
@@ -48,7 +48,7 @@ e90ce9c6d54f59811f3e2a1de57f542e *man/pedometrics-package.Rd
 868685bb31e911b3afd50347a1714091 *man/statsMS.Rd
 323c9c69648d88e25eacd2e34621fbf2 *man/stepVIF.Rd
 d87865ece973562276f472368ff2de19 *man/trend.Rd
-331cb8bf6d432d3c9fd6e4ce2545ffcf *man/vgmICP.Rd
+264ba4527fd307b031440a8db44ce563 *man/vgmICP.Rd
 755400d3839ea6558f7f6b315824a881 *man/vgmLags.Rd
 a3f0ab126c3ce68711a25e160c8e4217 *man/vgmSCV.Rd
 74044dde5a77e91c3a9e5ba0ea8e116a *src/RcppExports.cpp
