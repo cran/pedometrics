@@ -1,89 +1,78 @@
 #' Initial covariance parameters (ICP)
 #' 
-#' Guess the initial values for the covariance parameters required to fit a
-#' variogram model.
+#' Guess the initial values for the covariance parameters required to fit a variogram model.
 #' 
 #' @inheritParams vgmLags
 #' 
-#' @param z Numeric vector with the values of the response variable for which 
-#' the initial values for the covariance parameters should be guessed.
+#' @param z Numeric vector with the values of the response variable for which the initial values for the
+#' covariance parameters should be guessed.
 #' 
-#' @param lags Numeric scalar defining the width of the lag-distance classes,
-#' or a numeric vector with the lower and upper bounds of the lag-distance
-#' classes. If missing, the lag-distance classes are computed using 
-#' \code{\link[pedometrics]{vgmLags}}. See \sQuote{Details} for more 
+#' @param lags Numeric scalar defining the width of the lag-distance classes, or a numeric vector with the 
+#' lower and upper bounds of the lag-distance classes. If missing, the lag-distance classes are computed using 
+#' \code{\link[pedometrics]{vgmLags}}. See \sQuote{Details} for more information.
+#' 
+#' @param method Character keyword defining the method used for guessing the initial covariance parameters. 
+#' Defaults to \code{method = "a"}. See \sQuote{Details} for more information.
+#' 
+#' @param min.npairs Positive integer defining the minimum number of point-pairs required so that a 
+#' lag-distance class is used for guessing the initial covariance parameters. Defaults to `min.npairs = 30`.
+#' 
+#' @param model Character keyword defining the variogram model that will be fitted to the data. Currently, 
+#' most basic variogram models are accepted. See \code{\link[geoR]{cov.spatial}} for more information. Defaults
+#' to `model = "matern"`.
+#' 
+#' @param nu numerical value for the additional smoothness parameter \eqn{\nu} of the correlation function. See
+#' \code{\link[RandomFields]{RMmodel}} and argument \code{kappa} of \code{\link[geoR]{cov.spatial}} for more 
 #' information.
 #' 
-#' @param method Character keyword defining the method used for guessing the
-#' initial covariance parameters. Defauls to \code{method = "a"}. See 
-#' \sQuote{Details} for more information.
+#' @param plotit Should the guessed initial covariance parameters be plotted along with the sample variogram? 
+#' Defaults to \code{plotit = FALSE}.
 #' 
-#' @param min.npairs Positive integer defining the minimum number of 
-#' point-pairs required so that a lag-distance class is used for guessing the
-#' initial covariance parameters. Defaults to \code{min.npairs = 30}.
-#' 
-#' @param model Character keyword defining the variogram model that will be
-#' fitted to the data. Currently, most basic variogram models are accepted.
-#' See \code{\link[geoR]{cov.spatial}} for more information. Defaults to
-#' \code{model = "matern"}.
-#' 
-#' @param nu numerical value for the additional smoothness parameter \eqn{\nu} 
-#' of the correlation function. See \code{\link[RandomFields]{RMmodel}} and
-#' argument \code{kappa} of \code{\link[geoR]{cov.spatial}} for more 
-#' information.
-#' 
-#' @param plotit Should the guessed initial covariance parameters be plotted
-#' along with the sample variogram? Defaults to \code{plotit = FALSE}.
-#' 
-#' @param estimator Character keyword defining the estimator for computing the
-#' sample variogram, with options \code{"qn"}, \code{"mad"}, \code{"matheron"},
-#' and \code{"ch"}. Defaults to \code{estimator = "qn"}. See 
+#' @param estimator Character keyword defining the estimator for computing the sample variogram, with options 
+#' `"qn"`, `"mad"`, `"matheron"`, and `"ch"`. Defaults to `estimator = "qn"`. See 
 #' \code{\link[georob]{sample.variogram}} for more details.
 #' 
-#' @return A vector of numeric values: the guesses for the covariance parameters
-#' nugget, partial sill, and range.
+#' @return A vector of numeric values: the guesses for the covariance parameters nugget, partial sill, and 
+#' range.
 #' 
-#' @details There are five methods two guess the initial covariance parameters
-#' (ICP). Two of them (\code{"a"} and \code{"b"}) rely a sample variogram with
-#' exponentially spaced lag-distance classes, while the other three (\code{"b"},
-#' \code{"d"}, and \code{"e"}) use equidistant lag-distance classes (see
-#' \code{\link[pedometrics]{vgmLags}}). All of them are 
-#' \href{https://en.wikipedia.org/wiki/Heuristic}{heuristic}.
+#' @details There are five methods two guess the initial covariance parameters  (ICP). Two of them, `"a"` and
+#' `"c"`, rely a sample variogram with exponentially spaced lag-distance classes, while the other three, `"b"`,
+#' `"d"`, and `"e"`, use equidistant lag-distance classes (see \code{\link[pedometrics]{vgmLags}}). All of them
+#' are \href{https://en.wikipedia.org/wiki/Heuristic}{heuristic}.
 #' 
-#' Method \code{"a"} was developed in-house, and is the most elaborated of them,
-#' specially for guessing the nugget variance. Method \code{"c"} is implemented 
-#' in the \pkg{automap}-package and was developed by 
+#' Method `"a"` was developed in-house and is the most elaborated of them, specially for guessing the nugget
+#' variance.
+#' 
+#' Method `"b"` was proposed by \href{http://dx.doi.org/10.1016/0098-3004(95)00095-X}{Jian et al. (1996)} and
+#' is implemented in \href{https://support.sas.com/documentation/cdl/en/statug/63347/HTML/default/viewer.htm#statug_variogram_a0000000593.htm}{SAS/STAT(R) 9.22}.
+#' 
+#' Method `"c"` is implemented in the __automap__-package and was developed by 
 #' \href{http://dx.doi.org/10.1016/j.cageo.2008.10.011}{Hiemstra et al. (2009)}.
 #' 
-#' Method \code{"b"} was proposed by 
-#' \href{http://dx.doi.org/10.1016/0098-3004(95)00095-X}{Jian et al. (1996)} and
-#' is implemented in \href{https://support.sas.com/documentation/cdl/en/statug/63347/HTML/default/viewer.htm#statug_variogram_a0000000593.htm}{SAS/STAT(R) 9.22}.
-#' Method \code{"d"} was developed by 
-#' \href{http://dx.doi.org/10.1007/s11004-012-9434-1}{Desassis & Renard (2012)}.
-#' Method \code{"e"} was proposed by 
-#' \href{http://www.ccgalberta.com/ccgresources/report05/2003-122-varfit.pdf}{Larrondo et al. (2003)} and is implemented in the VARFIT module of 
-#' \href{http://www.gslib.com/}{GSLIB}.
+#' Method `"d"` was developed by \href{http://dx.doi.org/10.1007/s11004-012-9434-1}{Desassis & Renard (2012)}.
+#' 
+#' Method `"e"` was proposed by \href{http://www.ccgalberta.com/ccgresources/report05/2003-122-varfit.pdf}{Larrondo et al. (2003)} and is implemented in the VARFIT module of \href{http://www.gslib.com/}{GSLIB}.
 #' 
 #' @references 
 #' 
-#' Desassis, N. & Renard, D. Automatic variogram modelling by iterative least
-#' squares: univariate and multivariate cases. \emph{Mathematical Geosciences}.
-#' Springer Science \eqn{+} Business Media, v. 45, p. 453-470, 2012.
+#' Desassis, N. & Renard, D. Automatic variogram modelling by iterative least squares: univariate and 
+#' multivariate cases. _Mathematical Geosciences_. Springer Science \eqn{+} Business Media, v. 45, p. 453-470,
+#' 2012.
 #' 
-#' Hiemstra, P. H.; Pebesma, E. J.; Twenhöfel, C. J. & Heuvelink, G. B. 
-#' Real-time automatic interpolation of ambient gamma dose rates from the Dutch 
-#' radioactivity monitoring network. \emph{Computers & Geosciences}. Elsevier 
-#' BV, v. 35, p. 1711-1721, 2009.
+#' Hiemstra, P. H.; Pebesma, E. J.; Twenhöfel, C. J. & Heuvelink, G. B. Real-time automatic interpolation of
+#' ambient gamma dose rates from the Dutch radioactivity monitoring network. _Computers & Geosciences_. 
+#' Elsevier BV, v. 35, p. 1711-1721, 2009.
 #' 
-#' Jian, X.; Olea, R. A. & Yu, Y.-S. Semivariogram modelling by weighted least
-#' squares. \emph{Computers & Geosciences}. Elsevier BV, v. 22, p. 387-397, 
-#' 1996.
+#' Jian, X.; Olea, R. A. & Yu, Y.-S. Semivariogram modelling by weighted least squares. 
+#' _Computers & Geosciences_. Elsevier BV, v. 22, p. 387-397, 1996.
 #' 
-#' Larrondo, P. F.; Neufeld, C. T. & Deutsch, C. V. \emph{VARFIT: a program for 
-#' semi-automatic variogram modelling}. Edmonton: Department of Civil and
-#' Environmental Engineering, University of Alberta, p. 17, 2003.
+#' Larrondo, P. F.; Neufeld, C. T. & Deutsch, C. V. _VARFIT: a program for semi-automatic variogram modelling_.
+#' Edmonton: Department of Civil and Environmental Engineering, University of Alberta, p. 17, 2003.
 #' 
-#' @author Alessandro Samuel-Rosa <\email{alessandrosamuelrosa@@gmail.com}>
+#' @note 
+#' Package __geoR__ is used to guess the range (scale) parameter of the following covariance models: "matern" (except when `nu = 0.5`), "powered.exponential", "stable", "cauchy", "gencauchy", "gneiting", and "gneiting.matern". However, __geoR__ is an orphan package since 2020-01-12. Thus, if __geoR__ is not installed, a guess of the practical range of these covariance models is returned. The practical range is the distance at which the semivariance reaches its maximum, i.e. the sill.
+#' 
+#' @author Alessandro Samuel-Rosa \email{alessandrosamuelrosa@@gmail.com}
 #' 
 #' @seealso \code{\link[pedometrics]{vgmLags}}, 
 #'          \code{\link[georob]{sample.variogram}}, 
@@ -95,27 +84,28 @@
 #' @examples
 #' data(meuse, package = "sp")
 #' icp <- vgmICP(z = log(meuse$copper), coords = meuse[, 1:2])
-# FUNCTION - MAIN ##############################################################
+# FUNCTION - MAIN #############################################################################################
 vgmICP <- 
-  function (z, coords, lags, cutoff = 0.5, method = "a", min.npairs = 30, 
-            model = "matern", nu = 0.5, estimator = "qn", plotit = FALSE) {
+  function (z, coords, lags, cutoff = 0.5, method = "a", min.npairs = 30, model = "matern", nu = 0.5, 
+            estimator = "qn", plotit = FALSE) {
     
     # Check arguments
     cov_models <- c(
-      "matern", "exponential", "gaussian", "spherical", "circular", "cubic",
-      "wave", "linear", "power", "powered.exponential", "stable", "cauchy",
-      "gencauchy", "gneiting", "gneiting.matern", "pure.nugget")
+      "matern", "exponential", "gaussian", "spherical", "circular", "cubic", "wave", "linear", "power", 
+      "powered.exponential", "stable", "cauchy", "gencauchy", "gneiting", "gneiting.matern", "pure.nugget")
+    
     if (!model %in% cov_models) {
       stop (paste("model '", model, "' is not implemented", sep = ""))
     }
     
     # Check if suggested packages are installed
-    pkg <- c("georob", "geoR")
+    # geoR has been orphaned on 2020-01-12
+    # pkg <- c("georob", "geoR")
+    pkg <- c("georob")
     id <- !sapply(pkg, requireNamespace, quietly = TRUE)
     if (any(id)) {
       pkg <- paste(pkg[which(id)], collapse = " ")
-      stop(paste("Package(s) needed for this function to work but not",
-                 "installed: ", pkg, sep = ""), call. = FALSE)
+      stop(paste("Package(s) needed for this function to work but not installed:", pkg), call. = FALSE)
     }
     
     # Check lags and max.dist
@@ -131,8 +121,7 @@ vgmICP <-
     
     # Compute variogram
     v <- georob::sample.variogram(
-      object = z, locations = coords, lag.dist.def = lags, max.lag = cutoff,
-      estimator = estimator)
+      object = z, locations = coords, lag.dist.def = lags, max.lag = cutoff, estimator = estimator)
     lags0 <- length(v$lag.dist)
     
     # Merge lag-distance classes that have too few point-pairs
@@ -142,8 +131,7 @@ vgmICP <-
       while (length(idx) >= 1) {
         lags <- lags[-idx[1]]
         v <- georob::sample.variogram(
-          object = z, locations = coords, lag.dist.def = lags, 
-          max.lag = cutoff, estimator = estimator)
+          object = z, locations = coords, lag.dist.def = lags, max.lag = cutoff, estimator = estimator)
         idx <- which(v$npairs < min.npairs) + 1
       }
     }
@@ -151,7 +139,7 @@ vgmICP <-
       graphics::plot(v)
     }
     
-    # SILL
+    # SILL ----------------------------------------------------------------------------------------------------
     # The initial guess for the sill should be the easiest among all
     # parameters needed to fit a covariance model. Several rules are used in the
     # literature:
@@ -187,26 +175,22 @@ vgmICP <-
       graphics::abline(h = sill, lty = "dashed")
     }
     
-    # RANGE
-    # In general, the initial guess for the range (scale) parameter is made 
-    # based on the lag-distance classes and on the dimensions of the study area.
-    # The most common rule is to compute the initial range as half the 
-    # maximum distance up to which lag-distance classes have been defined 
-    # (Jian et al., 1996; Larrondo et al., 2003; Desassis & Renard, 2012). 
-    # Others set the initial range to a proportion of the diagonal of the study 
-    # area, say 0.1, 0.35 or 0.5 (Hiemstra et al., 2009).
-    # I think that this rather arbitrary and, possibly, suboptimal because the 
-    # lag-distance classes usually are defined by some automatic procedure
-    # implemented in the software being used, which does not account for the
-    # features of the data that is being analysed.
-    # I propose using the estimate of the variance and semivariance of the data
-    # to make an initial guess for the range parameter. The variance is used
-    # here because it is the initial guess of the total sill (see bellow).
-    # I start computing the absolute difference between the semivariogram and 
-    # the variance in each lag-distance class (except for the first). Then, I
-    # record the index of the lag-distance class where the semivariance is 
-    # closest to the variance. The separation distance at the centre of this 
-    # lag-distance class is used as the initial guess for the range parameter.
+    # RANGE ---------------------------------------------------------------------------------------------------
+    # In general, the initial guess for the range (scale) parameter is made based on the lag-distance classes
+    # and on the dimensions of the study area. A common rule is to compute the initial range as half the 
+    # maximum distance up to which lag-distance classes have been defined (Jian et al., 1996; Larrondo et al.,
+    # 2003; Desassis & Renard, 2012). Others set the initial range to a proportion of the diagonal of the study
+    # area, say 0.1, 0.35 or 0.5 (Hiemstra et al., 2009). This is rather arbitrary: the lag-distance classes
+    # usually are defined by some automatic procedure implemented in the software being used, which does not
+    # account for the features of the data that is being analysed.
+    # I propose using the estimate of the total variance and semivariance of the variable to make an initial
+    # guess for the range parameter. The total variance is used here because it is the initial guess of the
+    # total sill (see bellow).
+    # I start computing the absolute difference between the total variance and the semivariogram in each 
+    # lag-distance class (except for the first). Then, I record the index of the lag-distance class where the
+    # semivariance is closest to the variance. The separation distance at the centre of this lag-distance class
+    # is recorded. This value can be taken to be approximately equivalent to the practical range. Thus, it is
+    # corrected using geoR::practicalRange.
     range <- switch(
       method, 
       a = { # Samuel-Rosa2015
@@ -225,16 +209,37 @@ vgmICP <-
         lags[length(lags)]
       }
     )
-    
     # Correct initial guess of the range parameter
-    range <- range / 
-      geoR::practicalRange(cov.model = model, phi = 1, kappa = nu)
+    # geoR has been orphaned on 2020-01-12
+    if (model %in% c('linear', 'power')) {
+      range <- Inf
+    } else if (model == 'pure.nugget') {
+      range <- 0
+    } else if (model == 'exponential' | model == 'matern' & nu == 0.5) {
+      range <- range / 2.995731
+    } else if (model %in% c('spherical', 'circular', 'cubic')) {
+      range <- range
+    } else if (model == 'gaussian') {
+      range <- range / 1.730818
+    } else if (model == 'wave') {
+      range <- range / 2.991457
+    } else {
+      # "matern", "powered.exponential", "stable", "cauchy", "gencauchy", "gneiting", "gneiting.matern"
+      if (requireNamespace('geoR', quietly = TRUE)) {
+        range <- range / geoR::practicalRange(cov.model = model, phi = 1, kappa = nu)
+      } else {
+        message(
+          paste('geoR not installed... returning guess of practical range for model', model)
+        )
+        range <- range
+      }
+    }
     
     if (plotit) {
       graphics::abline(v = range, lty = "dashed")
     }
     
-    # NUGGET
+    # NUGGET --------------------------------------------------------------------------------------------------
     # The initial guess for the nugget variance is commonly made using one of
     # the following rules:
     # 1) use the minimum semivariance in the sample variogram (Hiemstra et al.,
@@ -405,7 +410,8 @@ vgmICP <-
     if (nugget < sill) {
       p_sill <- sill - nugget
     } else {
-      p_sill <- 1e-12
+      # p_sill <- 1e-12
+      p_sill <- nugget * 1e-3
     }
     
     # Prepare output

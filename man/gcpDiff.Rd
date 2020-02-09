@@ -60,7 +60,7 @@ calculated only for the the vertical displacement (error) in the \sQuote{z}
 coordinate. Both objects \code{measured} and \code{predicted} used with
 function \code{gcpDiff()} must be of class \code{SpatialPointsDataFrame}.
 They also must have a column named \sQuote{siteID} giving the identification
-of evary case. Again, matching of case IDs is mandatory. However, both
+of every case. Again, matching of case IDs is mandatory. However, both
 objects must have a column named \sQuote{z} which contains the values of the
 \sQuote{z} coordinate. Other columns are discarded.
 }
@@ -92,6 +92,7 @@ in the present version.
 \examples{
 
 \dontrun{
+if (require(spsurvey)) {
 ## Create an spsurvey.analysis object
 my.spsurvey <- 
   spsurvey.analysis(design = coordenadas(my.data),
@@ -100,10 +101,8 @@ my.spsurvey <-
                     support = rep(1, length(my.data$id)),
                     wgt = rep(1, length(my.data$id)), vartype = "SRS")
 }
-
 }
-\author{
-Alessandro Samuel-Rosa <\email{alessandrosamuelrosa@gmail.com}>
+
 }
 \references{
 Kincaid, T. M. and Olsen, A. R. (2013). spsurvey: Spatial Survey
@@ -115,5 +114,7 @@ Design and Analysis. R package version 2.6. URL:
 \code{\link[pedometrics]{gcpVector}},
 \code{\link[spsurvey]{spsurvey.analysis}}.
 }
+\author{
+Alessandro Samuel-Rosa \email{alessandrosamuelrosa@gmail.com}
+}
 \keyword{methods}
-

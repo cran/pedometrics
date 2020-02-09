@@ -24,7 +24,7 @@
 #' \sQuote{Details}.
 #' @return A \code{data.frame} containing summary statistics of the cumulative
 #' distribution function of a continuous variable.
-#' @author Alessandro Samuel-Rosa <\email{alessandrosamuelrosa@@gmail.com}>
+#' @author Alessandro Samuel-Rosa \email{alessandrosamuelrosa@@gmail.com}
 #' @seealso \code{\link[spsurvey]{cont.analysis}}.
 #' @references Kincaid, T. M. and Olsen, A. R. (2013). spsurvey: Spatial Survey
 #' Design and Analysis. R package version 2.6. URL:
@@ -34,6 +34,7 @@
 #' @examples
 #' 
 #' \dontrun{
+#' if (require(spsurvey)) {
 #' ## Estimate the CDF
 #' my.cdf <- spsurvey::cont.analysis(spsurvey.obj = my.spsurvey)
 #' 
@@ -43,12 +44,15 @@
 #' ## Return all summary statistics of indicator variable 'dx'
 #' cdfStats(my.cdf, "dx", all = TRUE)
 #' }
+#' }
 #' 
-# FUNCTION #####################################################################
+# FUNCTION ####################################################################################################
 cdfStats <- 
   function(obj, ind, all = TRUE) {
-    stats <- data.frame(obj$Pct[obj$Pct$Indicator == ind, 4:9][8:10, ],
-                        row.names = NULL)
+    
+    .Deprecated(msg = "'cdfStats' is deprecated.\nSee https://github.com/samuel-rosa/ASRtools")
+    
+    stats <- data.frame(obj$Pct[obj$Pct$Indicator == ind, 4:9][8:10, ], row.names = NULL)
     if(all) {
       res <- stats  
     } else {

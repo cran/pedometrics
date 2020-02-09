@@ -4,11 +4,26 @@
 \alias{cdfPlot}
 \title{Plot estimated cumulative distribution function with confidence limits}
 \usage{
-cdfPlot(obj, ind, units.cdf = "percent", type.plot = "s",
-  type.cdf = "continuous", logx = "", xlbl = NULL, ylbl = "Percent",
-  ylbl.r = NULL, figlab = NULL, legloc = "BR", confcut = 5,
-  show.conflev = TRUE, conflev = 95, show.param = TRUE, round = 0,
-  col.param = "black", ...)
+cdfPlot(
+  obj,
+  ind,
+  units.cdf = "percent",
+  type.plot = "s",
+  type.cdf = "continuous",
+  logx = "",
+  xlbl = NULL,
+  ylbl = "Percent",
+  ylbl.r = NULL,
+  figlab = NULL,
+  legloc = "BR",
+  confcut = 5,
+  show.conflev = TRUE,
+  conflev = 95,
+  show.param = TRUE,
+  round = 0,
+  col.param = "black",
+  ...
+)
 }
 \arguments{
 \item{obj}{Object with the estimated CDF. The resulting object of
@@ -98,7 +113,7 @@ original function \code{\link[spsurvey]{cdf.plot}} and those passed to
 functions was one of the reasons for creating this new implementation.
 }
 \note{
-Most of the source code that constitutes this function was originaly
+Most of the source code that constitutes this function was originally
 published in the \pkg{spsurvey}-package, version 2.6 (2013-09-20). The
 authors were asked to include a few new functionalities, but did not seem to
 be interested in doing so, since no reply was obtained. This implementation
@@ -109,6 +124,7 @@ should be given to the authors of the original implementation in the
 \examples{
 
 \dontrun{
+if (require(spsurvey)) {
 ## Estimate the CDF
 my.cdf <- spsurvey::cont.analysis(spsurvey.obj = my.spsurvey)
 
@@ -119,12 +135,8 @@ levels(my.cdf$Pct$Indicator)
 cdfPlot(obj = my.cdf, ind = "dz", figlab = "",
    xlbl = "Difference (m)", xlim = c(-30, 10), type.plot = "s")
 }
-
 }
-\author{
-Tony Olsen \email{Olsen.Tony@epa.gov}\cr Tom Kincaid
-\email{Kincaid.Tom@epa.gov}\cr Alessandro Samuel-Rosa
-\email{alessandrosamuelrosa@gmail.com}
+
 }
 \references{
 Brus, D. J., Kempen, B. and Heuvelink, G. B. M. (2011).
@@ -144,6 +156,10 @@ and Analysis}.  R package version 2.6. URL:
 \seealso{
 \code{\link[spsurvey]{cdf.plot}}.
 }
+\author{
+Tony Olsen \email{Olsen.Tony@epa.gov}\cr Tom Kincaid
+\email{Kincaid.Tom@epa.gov}\cr Alessandro Samuel-Rosa
+\email{alessandrosamuelrosa@gmail.com}
+}
 \keyword{dplot}
 \keyword{hplot}
-

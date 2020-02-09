@@ -138,9 +138,9 @@
 #' }
 #' \subsection{ind}{
 #' The model series plot allows to see how the design influences model 
-#' performance. This is achieved mainly through the use of different colours in
+#' performance. This is achieved mainly through the use of different colors in
 #' the grid output, where each unique value in the \emph{design} data is 
-#' represented by a different colour. For the example given above, one could
+#' represented by a different color. For the example given above, one could
 #' try to see if the models built with the more accurate versions of the
 #' predictor variables have a better performance by identifying their relative
 #' distribution in the model series plot. The models placed at the 
@@ -178,15 +178,15 @@
 #' Roger D. Peng (2008). \emph{A method for visualizing multivariate time series
 #' data.} Journal of Statistical Software. v. 25 (Code Snippet), p. 1-17.
 #' 
-#' Roger D. Peng (2012). \emph{mvtsplot: Multivariate Time Series Plot.} R 
-#' package version 1.0-1. \url{http://CRAN.R-project.org/package=mvtsplot}.
+#' Roger D. Peng (2012). _mvtsplot: Multivariate Time Series Plot._ R package version 1.0-1. 
+#' \url{https://CRAN.R-project.org/package=mvtsplot}.
 #' 
 #' @author Alessandro Samuel-Rosa \email{alessandrosamuelrosa@@gmail.com}
 #' 
 #' @note 
 #' Some of the solutions used to build this function were found in the source 
 #' code of the R-package \pkg{mvtsplot}. As such, the author of that package, 
-#' Roger D. Peng <\email{rpeng@@jhsph.edu}>, is entitled \sQuote{contributors} to
+#' Roger D. Peng \email{rpeng@@jhsph.edu}, is entitled \sQuote{contributors} to
 #' the R-package \pkg{pedometrics}.
 #' 
 #' @section Warning:

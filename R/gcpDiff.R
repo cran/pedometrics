@@ -30,7 +30,7 @@
 #' coordinate. Both objects \code{measured} and \code{predicted} used with
 #' function \code{gcpDiff()} must be of class \code{SpatialPointsDataFrame}.
 #' They also must have a column named \sQuote{siteID} giving the identification
-#' of evary case. Again, matching of case IDs is mandatory. However, both
+#' of every case. Again, matching of case IDs is mandatory. However, both
 #' objects must have a column named \sQuote{z} which contains the values of the
 #' \sQuote{z} coordinate. Other columns are discarded.
 #' }
@@ -77,7 +77,7 @@
 #' argument \code{data.cont} when creating a \code{spsurvey.analysis} object.
 #' @note Data of \code{type = "xy"} cannot be submitted to cluster aggregation
 #' in the present version.
-#' @author Alessandro Samuel-Rosa <\email{alessandrosamuelrosa@@gmail.com}>
+#' @author Alessandro Samuel-Rosa \email{alessandrosamuelrosa@@gmail.com}
 #' @seealso \code{\link[pedometrics]{coordenadas}},
 #' \code{\link[pedometrics]{gcpVector}},
 #' \code{\link[spsurvey]{spsurvey.analysis}}.
@@ -89,6 +89,7 @@
 #' @examples
 #' 
 #' \dontrun{
+#' if (require(spsurvey)) {
 #' ## Create an spsurvey.analysis object
 #' my.spsurvey <- 
 #'   spsurvey.analysis(design = coordenadas(my.data),
@@ -96,6 +97,7 @@
 #'                     popcorrect = TRUE, pcfsize = length(my.data$id),
 #'                     support = rep(1, length(my.data$id)),
 #'                     wgt = rep(1, length(my.data$id)), vartype = "SRS")
+#' }
 #' }
 #' 
 gcpDiff <- 

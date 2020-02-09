@@ -26,8 +26,8 @@ SpatialPoints* or SpatialPolygons* object from it.
 \note{
 Some of the solutions used to build this function were found in the
 source code of the R-package \pkg{intamapInteractive}. As such, the authors
-of that package, Edzer Pebesma <\email{edzer.pebesma@uni-muenster.de}> and
-Jon Skoien <\email{jon.skoien@gmail.com}>, are entitled
+of that package, Edzer Pebesma \email{edzer.pebesma@uni-muenster.de} and
+Jon Skoien \email{jon.skoien@gmail.com}, are entitled
 \sQuote{contributors} to the R-package \pkg{pedometrics}.
 }
 \examples{
@@ -36,16 +36,15 @@ data(meuse)
 coordinates(meuse) <- ~ x + y
 bbox2sp(meuse, keep.crs = FALSE)
 }
-\author{
-Alessandro Samuel-Rosa <\email{alessandrosamuelrosa@gmail.com}>
-}
 \references{
-Edzer Pebesma, Jon Skoien with contributions from Olivier Baume,
-A. Chorti, D.T. Hristopulos, S.J. Melles and G. Spiliopoulos (2013).
-\emph{intamapInteractive: procedures for automated interpolation - methods
-only to be used interactively, not included in intamap package.} R package
-version 1.1-10.  \url{http://CRAN.R-project.org/package=intamapInteractive}
+Edzer Pebesma, Jon Skoien with contributions from Olivier Baume, A. Chorti, D.T. Hristopulos, S.J. Melles
+and G. Spiliopoulos (2013).
+\emph{intamapInteractive: procedures for automated interpolation - methods only to be used interactively, not}
+\emph{included in intamap package.} R package version 1.1-10.
+\url{https://CRAN.R-project.org/package=intamapInteractive}
+}
+\author{
+Alessandro Samuel-Rosa \email{alessandrosamuelrosa@gmail.com}
 }
 \keyword{misc}
 \keyword{spatial}
-

@@ -41,6 +41,7 @@ be set to \code{FALSE}.
 \examples{
 
 \dontrun{
+if (require(spsurvey)) {
 ## Estimate the CDF
 my.cdf <- spsurvey::cont.analysis(spsurvey.obj = my.spsurvey)
 
@@ -50,19 +51,19 @@ levels(my.cdf$Pct$Indicator)
 ## Return all summary statistics of indicator variable 'dx'
 cdfStats(my.cdf, "dx", all = TRUE)
 }
-
 }
-\author{
-Alessandro Samuel-Rosa <\email{alessandrosamuelrosa@gmail.com}>
+
 }
 \references{
 Kincaid, T. M. and Olsen, A. R. (2013). spsurvey: Spatial Survey
 Design and Analysis. R package version 2.6. URL:
-<http://www.epa.gov/nheerl/arm/>.
+\url{http://www.epa.gov/nheerl/arm/}.
 }
 \seealso{
 \code{\link[spsurvey]{cont.analysis}}.
 }
+\author{
+Alessandro Samuel-Rosa \email{alessandrosamuelrosa@gmail.com}
+}
 \keyword{methods}
 \keyword{print}
-

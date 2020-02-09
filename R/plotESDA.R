@@ -10,14 +10,17 @@
 #' of the point locations where the \code{z} variable was observed.
 #' @param lon Vector of numeric values containing the x coordinate (longitude) 
 #' of the point locations where the \code{z} variable was observed.
-#' @param lags Numerical vector; upper boundaries of lag-distance classes. See
-#' argument \code{boundaries} of \code{\link[gstat]{variogram}} for more info.
-#' @param cutoff Integer value defining the spatial separation distance up to 
-#' which point pairs are included in semi-variance estimates. Defaults to the 
-#' length of the diagonal of the box spanning the data divided by three.
+#' @param lags (optional) Numerical vector; upper boundaries of lag-distance classes. See argument 
+#' `boundaries` of \code{\link[gstat]{variogram}} for more info.
+#' @param cutoff (optional) Integer value defining the spatial separation distance up to which point pairs are 
+#' included in semi-variance estimates. Defaults to the length of the diagonal of the box spanning the data 
+#' divided by three.
 #' @param width Integer value specifying the width of subsequent distance 
 #' intervals into which data point pairs are grouped for semi-variance 
 #' estimates. Defaults to \code{width = cutoff / 20}.
+#' 
+#' @param leg.pos (optional) Character value indication the location of the legend of the bubble plot. 
+#' Defaults to `leg.pos = "right"`
 #' 
 #' @details
 #' The user should visit the help pages of \code{\link[gstat]{variogram}},
@@ -46,15 +49,15 @@
 #' @importFrom graphics plot
 #' @export
 #' @examples
-#' # require(gstat)
+#' # library(sp)
 #' # data(meuse)
 #' # plotESDA(z = meuse$zinc, lat = meuse$y, lon = meuse$x)
 #' 
 #' @keywords dplot
 #' 
-# FUNCTION #####################################################################
+# FUNCTION ####################################################################################################
 plotESDA <- 
-  function (z, lat, lon, lags, cutoff, width = c(cutoff / 20)) {
+  function (z, lat, lon, lags = NULL, cutoff = NULL, width = c(cutoff / 20), leg.pos = "right") {
     
     # Check if suggested packages are installed
     pkg <- c("gstat", "sp")
@@ -90,18 +93,19 @@ plotESDA <-
     sp::coordinates(db) <- ~ lon + lat
     
     # Estimate the cutoff
-    cutoff <- max(gstat::variogram(z ~ 1, loc = db)$dist)
+    if (is.null(cutoff)) {
+      cutoff <- max(gstat::variogram(z ~ 1, loc = db)$dist)
+    }
     
     # Bubble plot
-    v1 <- sp::bubble(db, zcol = "z", fill = FALSE, main = "", maxsize = 1)
+    v1 <- sp::bubble(db, zcol = "z", fill = FALSE, main = "", maxsize = 1, key.space = leg.pos)
     
     # Variogram map
-    v2 <- gstat::variogram(z ~ 1, loc = db, map = TRUE, cutoff = cutoff, 
-                           width = width)
+    v2 <- gstat::variogram(z ~ 1, loc = db, map = TRUE, cutoff = cutoff, width = width)
     v2 <- sp::spplot(v2$map[2], col.regions = sp::bpy.colors(64))
     
     # Sample variogram
-    if (missing(lags)) {
+    if (is.null(lags)) {
       v3 <- gstat::variogram(z ~ 1, loc = db, cutoff = cutoff, width = width)
     } else {
       v3 <- gstat::variogram(z ~ 1, loc = db, boundaries = lags)
@@ -109,8 +113,8 @@ plotESDA <-
     v3 <- plot(v3, cex = 0.5, type = "b", pch = 20, asp = 1)
     
     # Histogram
-    v4 <- plotHD(z, HD = "over", stats = FALSE, asp = 1, xlab = "z",
-                 col = c("skyblue", "red"))
+    v4 <- plotHD(z, HD = "over", stats = FALSE, asp = 1, xlab = "z", col = c("skyblue", "red"))
+    
     print(v4, split = c(1, 1, 2, 2), more = TRUE)
     print(v3, split = c(1, 2, 2, 2), more = TRUE)
     print(v1, split = c(2, 1, 2, 2), more = TRUE)

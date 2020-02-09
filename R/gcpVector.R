@@ -14,18 +14,19 @@
 #' @return An object of the class \code{data.frame} containing the module, its
 #' square and azimuth. These three columns are named \sQuote{module},
 #' \sQuote{sq.module} and \sQuote{azimuth}.
-#' @note This function was addapted from
-#' \code{\link[VecStatGraphs2D]{LoadData}}.
+#' @note This function was adapted from \code{\link[VecStatGraphs2D]{LoadData}}.
 #' @author Juan Carlos Ruiz Cuetos \email{bilba_t@@hotmail.com}\cr Maria
 #' Eugenia Polo Garcia \email{mepolo@@unex.es}\cr Pablo Garcia Rodriguez
 #' \email{pablogr@@unex.es}\cr Alessandro Samuel-Rosa
 #' \email{alessandrosamuelrosa@@gmail.com}
 #' @seealso \code{\link[VecStatGraphs2D]{LoadData}},
 #' \code{\link[pedometrics]{gcpDiff}}
-#' @references Ruiz-Cuetos J.C., Polo M.E. and Rodriguez P.G. (2012).
-#' \emph{VecStatGraphs2D: Vector analysis using graphical and analytical
-#' methods in 2D}. R package version 1.6.
-#' \url{http://CRAN.R-project.org/package=VecStatGraphs2D}
+#' 
+#' @references
+#' Ruiz-Cuetos J.C., Polo M.E. and Rodriguez P.G. (2012).
+#' _VecStatGraphs2D: Vector analysis using graphical and analytical methods in 2D_. R package version 1.6.
+#' \url{https://CRAN.R-project.org/package=VecStatGraphs2D}
+#' 
 #' @keywords methods
 #' @export
 #' @examples

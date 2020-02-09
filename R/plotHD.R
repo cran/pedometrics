@@ -30,8 +30,8 @@
 #' lambda value of the Box-Cox transform is printed in the console. It is set to
 #' zero when negative. Defaults to \code{BoxCox = FALSE}.
 #' 
-#' @param col Vector of two elements, the first indicating the colour of the
-#' histogram, the second indicating the colour of the density plot. Defaults to 
+#' @param col Vector of two elements, the first indicating the color of the
+#' histogram, the second indicating the color of the density plot. Defaults to 
 #' \code{col = c("lightgray", "black")}.
 #' 
 #' @param lwd Vector of two elements, the first indicating the line width of the
@@ -123,17 +123,16 @@ plotHD <-
       #  xlim <- densityplot(x)$x.limits
       #}
       p <- lattice::histogram(
-        x, type = "density", col = col[1], xlim = xlim, nint = nint, 
-        lwd = lwd[1], ..., 
-        panel = function(x, ...) {
+        x, type = "density", col = col[1], xlim = xlim, nint = nint, lwd = lwd[1], ..., 
+        panel = function (x, ...) {
+          lattice::panel.grid(h = -1, v = -1, lty = "dotted")
           lattice::panel.histogram(x, ...)
           lattice::panel.rug(x, col = col[2], lwd = lwd[1])
-          lattice::panel.mathdensity(dmath = stats::dnorm, col = col[2],
-                                     lwd = lwd[2], lty = lty, 
-                                     args = list(mean = mean(x), 
-                                                 sd = stats::sd(x)),
-                                     n = length(x))
-          })
+          lattice::panel.mathdensity(
+            dmath = stats::dnorm, col = col[2], lwd = lwd[2], lty = lty, n = length(x),
+            args = list(mean = mean(x), sd = stats::sd(x)))
+          }
+        )
       if (missing(ylim)) {
         y1 <- p$y.limits
         y2 <- lattice::densityplot(x)$y.limits
@@ -149,31 +148,30 @@ plotHD <-
                        "Range = ", round(min(x), digits), "-", 
                                    round(max(x), digits), "\n",
                        "Skew = ", skw, sep = ""))
-        if (skw >= 1) {
+        if (round(skw, 1) >= 0.9) {
           y <- NA
           pos <- NA
           p <- p + 
-            latticeExtra::layer(lattice::panel.text(x = x, y = y, labels = leg,
-                                                    pos = pos),
-                                data = list(x = c(max(p$x.limits) * 0.99), 
-                                            y = c(max(p$y.limits) * 0.9), 
-                                            leg = leg, pos = 2))
+            latticeExtra::layer(
+              lattice::panel.text(x = x, y = y, labels = leg, pos = pos),
+              data = list(x = c(max(p$x.limits) * 0.99), 
+                          y = c(max(p$y.limits) * 0.8), leg = leg, pos = 2))
         }
-        if (skw < 1) {
+        if (round(skw, 1) < 0.9) {
           y <- NA
           pos <- NA
           p <- p + 
-            latticeExtra::layer(lattice::panel.text(x = x, y = y, labels = leg, 
-                                                    pos = pos),
-                                data = list(x = c(min(p$x.limits)),
-                                            y = c(max(p$y.limits) * 0.9),
-                                            leg = leg, pos = 4))
+            latticeExtra::layer(
+              lattice::panel.text(x = x, y = y, labels = leg, pos = pos),
+              data = list(x = c(min(p$x.limits)), y = c(max(p$y.limits) * 0.8),
+                          leg = leg, pos = 4))
         }
       }
     }
     if (HD == "stack") {
-      p2 <- lattice::densityplot(x, col = col[2], pch = 20, cex = 0.5, 
-                                 n = length(x), lwd = lwd[2], lty = lty, ...)
+      p2 <- lattice::densityplot(
+        x, col = col[2], pch = 20, cex = 0.5, n = length(x), lwd = lwd[2], 
+        lty = lty, ...)
       if (missing(xlim)) {
         xlim <- p2$x.limits
       }

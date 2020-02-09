@@ -64,7 +64,7 @@
 #' Defaults to \code{show.conflev = TRUE}.
 #' @return A plot of the estimated cumulative distribution function with
 #' confidence limits.
-#' @note Most of the source code that constitutes this function was originaly
+#' @note Most of the source code that constitutes this function was originally
 #' published in the \pkg{spsurvey}-package, version 2.6 (2013-09-20). The
 #' authors were asked to include a few new functionalities, but did not seem to
 #' be interested in doing so, since no reply was obtained. This implementation
@@ -93,6 +93,7 @@
 #' @examples
 #' 
 #' \dontrun{
+#' if (require(spsurvey)) {
 #' ## Estimate the CDF
 #' my.cdf <- spsurvey::cont.analysis(spsurvey.obj = my.spsurvey)
 #' 
@@ -103,6 +104,7 @@
 #' cdfPlot(obj = my.cdf, ind = "dz", figlab = "",
 #'    xlbl = "Difference (m)", xlim = c(-30, 10), type.plot = "s")
 #' }
+#' }
 #' 
 # FUNCTION #####################################################################
 cdfPlot <- 
@@ -112,6 +114,8 @@ cdfPlot <-
             show.conflev = TRUE,
             conflev = 95, show.param = TRUE, round = 0, 
             col.param = "black", ...) {
+    
+    .Deprecated(msg = "'cdfPlot' is deprecated.\nSee https://github.com/samuel-rosa/ASRtools")
     
     # Check if suggested packages are installed
     if (!requireNamespace("spsurvey", quietly = TRUE)) {
