@@ -7,6 +7,8 @@
 \alias{vgmSCV.georob}
 \title{Spatially correlated variance (SCV)}
 \usage{
+vgmSCV(obj, digits = 4)
+
 \method{vgmSCV}{variomodel}(obj, digits = 4)
 
 \method{vgmSCV}{variogramModel}(obj, digits = 4)
@@ -14,20 +16,30 @@
 \method{vgmSCV}{georob}(obj, digits = 4)
 }
 \arguments{
-\item{obj}{Variogram model fitted with available function in geostatistical
-packages such as \pkg{gstat}, \pkg{geoR}, and \pkg{georob}.}
+\item{obj}{Variogram model fitted with available function in geostatistical packages such as
+\strong{gstat}, \strong{geoR}, and \strong{georob}.}
 
 \item{digits}{Integer indicating the number of decimal places to be used.}
 }
 \value{
-Numeric value indicating the proportion of the variance that is
-spatially correlated.
+Numeric value indicating the proportion of the variance that is spatially correlated.
 }
 \description{
 Compute the proportion of the variance that is spatially correlated.
 }
+\examples{
+if (all(c(require(gstat), require(sp)))) {
+  library(gstat)
+  library(sp)
+  data(meuse)
+  sp::coordinates(meuse) <- ~ x + y
+  vgm1 <- gstat::variogram(log(zinc) ~ 1, meuse)
+  fit <- gstat::fit.variogram(vgm1, gstat::vgm(1, "Sph", 300, 1))
+  res <- vgmSCV(fit)
+}
+}
 \seealso{
-\code{\link[pedometrics]{vgmLags}}
+\code{\link[=variogramBins]{variogramBins()}}
 }
 \author{
 Alessandro Samuel-Rosa \email{alessandrosamuelrosa@gmail.com}

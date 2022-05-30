@@ -1,50 +1,52 @@
 #' Association between categorical variables
-#' 
-#' Compute the Cramer's V, a descriptive statistic that measures the 
-#' association between categorical variables.
-#' 
+#'
+#' @description 
+#' Compute the Cramer's V, a descriptive statistic that measures the association between categorical
+#' variables.
+#'
 #' @param x Data frame or matrix with a set of categorical variables.
-#' 
+#'
 #' @details
 #' Any integer variable is internally converted to a factor.
-#' 
+#'
 #' @return
 #' A matrix with the Cramer's V between the categorical variables.
-#' 
+#'
 #' @author Alessandro Samuel-Rosa \email{alessandrosamuelrosa@@gmail.com}
-#' 
+#'
 #' @note
-#' The original code is available at \url{http://sas-and-r.blogspot.nl/},
-#' Example 8.39: calculating Cramer's V, posted by Ken Kleinman on Friday, June
-#' 3, 2011. As such, Ken Kleinman \email{Ken_Kleinman@@hms.harvard.edu} is 
-#' entitled a \sQuote{contributor} to the R-package \pkg{pedometrics}.
-#' 
-#' The function \code{bigtabulate} used to compute the chi-squared test is the
-#' main bottleneck in the current version of \code{cramer}. Ideally it will be
-#' implemented in C++.
-#' 
+#' The original code is available at <https://sas-and-r.blogspot.com/>, Example 8.39:
+#' calculating Cramer's V, posted by Ken Kleinman on Friday, June 3, 2011. As such, Ken Kleinman
+#' \email{Ken_Kleinman@@hms.harvard.edu} is entitled a \sQuote{contributor} to the R-package
+#' __pedometrics__.
+#'
+# The function \code{bigtabulate} used to compute the chi-squared test is the main bottleneck in
+# the current version of [pedometrics::cramer()]. Ideally it will be implemented in C++.
+#'
 #' @references
-#' Cramér, H. \emph{Mathematical methods of statistics}. Princeton: Princeton
-#' University Press, p. 575, 1946.
+#' Cramér, H. _Mathematical methods of statistics_. Princeton: Princeton University Press, p. 575,
+#' 1946.
+#'
+#' Everitt, B. S. _The Cambridge dictionary of statistics_. Cambridge: Cambridge University Press,
+#' p. 432, 2006.
 #' 
-#' Everitt, B. S. \emph{The Cambridge dictionary of statistics}. Cambridge: 
-#' Cambridge University Press, p. 432, 2006.
-#' 
-#' @seealso \code{\link[vcd]{assocstats}}
-#' @export
+#' @section Reverse dependencies:
+#' The __spsann__ package, provider of methods for the optimization of sample configurations using
+#' spatial simulated annealing in R, requires [pedometrics::cramer()] for some of its functions to
+#' work. The development version of the __spsann__ package is available on
+#' <https://github.com/Laboratorio-de-Pedometria/spsann-package>.
+#'
 #' @examples
-#' \dontrun{
-#' data <- read.csv("http://www.math.smith.edu/r/data/help.csv")
-#' data <- data[, c("female", "homeless", "racegrp")]
-#' str(data)
-#' test <- cramer(data)
-#' test
+#' if (interactive()) {
+#'   data(meuse, package = "sp")
+#'   str(meuse)
+#'   test <- cramer(meuse[, c("ffreq", "soil", "lime", "landuse")])
 #' }
-# FUNCTION #####################################################################
+# FUNCTION #########################################################################################
+#' @export
 cramer <-
-  function (x) {
+  function(x) {
     nam <- colnames(x)
-    
     # perform some checks
     check <- sapply(x, is.factor)
     if (any(check == FALSE)) {
@@ -56,7 +58,6 @@ cramer <-
     if (any(check < 2L)) {
       stop("each variable must have at least 2 levels")
     }
-    
     # the statistics is calculated using a for loop
     res <- matrix(NA, nrow = dim(x)[2], ncol = dim(x)[2])
     for (i in 1:dim(x)[2]) {
@@ -72,14 +73,14 @@ cramer <-
     }
     colnames(res) <- nam
     rownames(res) <- nam
-    return (res) 
+    return(res)
   }
 # Pearson's Chi-squared statistic ##############################################
 .chisqStat <-
-  function (x, y) {
+  function(x, y) {
     #x <- table(x, y)
     OBSERVED <- table(x, y)
-    #OBSERVED <- bigtabulate(cbind(x, y), ccols = c(1, 2))
+    # OBSERVED <- bigtabulate::bigtabulate(cbind(x, y), ccols = c(1, 2))
     n <- sum(OBSERVED)
     sr <- rowSums(OBSERVED)
     sc <- colSums(OBSERVED)
@@ -88,5 +89,5 @@ cramer <-
     #STATISTIC <- sum((abs(OBSERVED - EXPECTED) - YATES) ^ 2 / EXPECTED)
     #STATISTIC <- sum(abs(OBSERVED - EXPECTED) ^ 2 / EXPECTED)
     STATISTIC <- sum(abs(OBSERVED - EXPECTED) ^ 2 / EXPECTED, na.rm = TRUE)
-    return (STATISTIC)
+    return(STATISTIC)
   }

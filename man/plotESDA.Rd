@@ -15,65 +15,71 @@ plotESDA(
 )
 }
 \arguments{
-\item{z}{Vector of numeric values of the variable for with ESDA plots should
-be created.}
+\item{z}{Vector of numeric values of the variable for with ESDA plots should be created.}
 
-\item{lat}{Vector of numeric values containing the y coordinate (latitude)
-of the point locations where the \code{z} variable was observed.}
+\item{lat}{Vector of numeric values containing the y coordinate (latitude) of the point locations
+where the \code{z} variable was observed.}
 
-\item{lon}{Vector of numeric values containing the x coordinate (longitude)
-of the point locations where the \code{z} variable was observed.}
+\item{lon}{Vector of numeric values containing the x coordinate (longitude) of the point
+locations where the \code{z} variable was observed.}
 
 \item{lags}{(optional) Numerical vector; upper boundaries of lag-distance classes. See argument
-\code{boundaries} of \code{\link[gstat]{variogram}} for more info.}
+\code{boundaries} of \code{\link[gstat:variogram]{gstat::variogram()}} for more info.}
 
-\item{cutoff}{(optional) Integer value defining the spatial separation distance up to which point pairs are
-included in semi-variance estimates. Defaults to the length of the diagonal of the box spanning the data
-divided by three.}
+\item{cutoff}{(optional) Integer value defining the spatial separation distance up to which point
+pairs are included in semi-variance estimates. Defaults to the length of the diagonal of the box
+spanning the data divided by three.}
 
-\item{width}{Integer value specifying the width of subsequent distance
-intervals into which data point pairs are grouped for semi-variance
-estimates. Defaults to \code{width = cutoff / 20}.}
+\item{width}{Integer value specifying the width of subsequent distance intervals into which data
+point pairs are grouped for semi-variance estimates. Defaults to \code{width = cutoff / 20}.}
 
-\item{leg.pos}{(optional) Character value indication the location of the legend of the bubble plot.
-Defaults to \code{leg.pos = "right"}}
+\item{leg.pos}{(optional) Character value indication the location of the legend of the bubble
+plot. Defaults to \code{leg.pos = "right"}.}
 }
 \value{
-Four plots: histogram and density plot, bubble plot, empirical variogram,
-and variogram map.
+Four plots: histogram and density plot, bubble plot, empirical variogram, and variogram map.
 }
 \description{
-This function creates four plots for exploratory spatial data analysis
-(ESDA): histogram + density plot, bubble plot, variogram plot, and variogram
-map.
+Create four plots for exploratory spatial data analysis (ESDA): histogram + density plot,
+bubble plot, variogram plot, and variogram map.
 }
 \details{
-The user should visit the help pages of \code{\link[gstat]{variogram}},
-\code{\link[pedometrics]{plotHD}}, \code{\link[sp]{bubble}} and
-\code{\link[sp]{spplot}} to obtain more details about the main functions
-used to built \code{plotESDA}.
+The user should visit the help pages of \code{\link[gstat:variogram]{gstat::variogram()}}, \code{\link[=plotHD]{plotHD()}},
+\code{\link[sp:bubble]{sp::bubble()}} and \code{\link[sp:spplot]{sp::spplot()}} to obtain more details about the main functions used to built
+\code{\link[=plotESDA]{plotESDA()}}.
 }
-\examples{
-# library(sp)
-# data(meuse)
-# plotESDA(z = meuse$zinc, lat = meuse$y, lon = meuse$x)
+\section{Dependencies}{
 
+The \strong{sp} package, provider of classes and methods for spatial data in R, is required for
+\code{\link[=plotESDA]{plotESDA()}} to work. The development version of the \strong{sp} package is available on
+\url{https://github.com/edzer/sp/} while its old versions are available on the CRAN archive at
+\url{https://cran.r-project.org/src/contrib/Archive/sp/}.
+
+The \strong{gstat} package, provider of methods for spatial and spatio-temporal geostatistical
+modelling, prediction and simulation in R, is required for \code{\link[=plotESDA]{plotESDA()}} to work. The
+development version of the \strong{sp} package is available on \url{https://github.com/r-spatial/gstat}
+while its old versions are available on the CRAN archive at
+\url{https://cran.r-project.org/src/contrib/Archive/gstat/}.
+}
+
+\examples{
+if (all(require(sp), require(gstat))) {
+  data(meuse, package = "sp")
+  p <- plotESDA(z = meuse$zinc, lat = meuse$y, lon = meuse$x)
+}
 }
 \references{
-Cressie, N.A.C. (1993) \emph{Statistics for Spatial Data}. New York: John
-Wiley \& Sons, p.900, 1993.
+Cressie, N.A.C. (1993) \emph{Statistics for Spatial Data}. New York: John Wiley \& Sons, p.900, 1993.
 
-Pebesma, E.J. (2004) Multivariable geostatistics in S: the gstat package.
-\emph{Computers \& Geosciences}, 30:683-691, 2004.
+Pebesma, E.J. (2004) Multivariable geostatistics in S: the gstat package. \emph{Computers \&
+Geosciences}, 30:683-691, 2004.
 
-Webster, R. \& Oliver, M.A. \emph{Geostatistics for environmental
-scientists}. Chichester: John Wiley \& Sons, p.315, 2007.
+Webster, R. \& Oliver, M.A. \emph{Geostatistics for environmental scientists}. Chichester: John Wiley
+\& Sons, p.315, 2007.
 }
 \seealso{
-\code{\link[gstat]{variogram}}, \code{\link[pedometrics]{plotHD}},
-\code{\link[sp]{bubble}}, \code{\link[sp]{spplot}}.
+\code{\link[=plotHD]{plotHD()}}
 }
 \author{
 Alessandro Samuel-Rosa \email{alessandrosamuelrosa@gmail.com}
 }
-\keyword{dplot}

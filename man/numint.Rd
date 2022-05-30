@@ -49,8 +49,7 @@ uniqueClass(x)
 \item{x}{Object to be tested.}
 }
 \value{
-\code{TRUE} or \code{FALSE} depending on whether \code{x} contains a given
-data type.
+\code{TRUE} or \code{FALSE} depending on whether \code{x} contains a given data type.
 }
 \description{
 Evaluate the data type contained in an object.
@@ -76,10 +75,10 @@ isNumint(1) # TRUE
 
 # Single numeric value
 isNumint(1.1) # FALSE
+
 }
 \seealso{
-\code{\link[base]{is.numeric}}, \code{\link[base]{is.integer}},
-\code{\link[base]{is.factor}}.
+\code{\link[base:numeric]{base::is.numeric()}}, \code{\link[base:integer]{base::is.integer()}}, \code{\link[base:factor]{base::is.factor()}}.
 }
 \author{
 Alessandro Samuel-Rosa \email{alessandrosamuelrosa@gmail.com}

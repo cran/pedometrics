@@ -1,165 +1,167 @@
 #' Build a series of linear models using automated variable selection
-#' 
-#' This function allows building a series of linear models (\code{lm}) using 
-#' one or more automated variable selection implemented in function 
-#' \code{stepVIF} and \code{stepAIC}.
-#' 
-#' @param formula A list containing one or several model formulas (a symbolic
-#' description of the model to be fitted).
+#'
+#' @description
+#' Build a series of linear models with [stats::lm()] using one or more automated variable
+#' selection methods implemented in the functions [pedometrics::stepVIF()] and [MASS::stepAIC()].
+#'
+#' @param formula A list containing one or several model formulas (a symbolic description of the
+#' model to be fitted).
+#'
 #' @param data Data frame containing the variables in the model formulas.
-#' @param vif Logical for performing backward variable selection using the 
-#' Variance-Inflation Factor (VIF). Defaults to \code{VIF = FALSE}.
-#' @param vif.threshold Numeric value setting the maximum acceptable VIF value.
-#' Defaults to \code{vif.threshold = 10}.
-#' @param vif.verbose Logical for printing iteration results of backward 
-#' variable selection using the VIF. Defaults to \code{vif.verbose = FALSE}.
-#' @param aic Logical for performing variable selection using Akaike 
-#' Information Criterion (AIC). Defaults to \code{aic = FALSE}.
-#' @param aic.direction Character string setting the direction of variable 
-#' selection when using AIC. Available options are \code{"both"}, 
-#' \code{"forward"}, and \code{"backward"}. Defaults to 
-#' \code{aic.direction = "both"}.
-#' @param aic.trace Logical for printing iteration results of variable selection
-#' using the AIC. Defaults to \code{aic.trace = FALSE}.
-#' @param aic.steps Integer value setting the maximum number of steps to be
-#' considered for variable selection using the AIC. Defaults to 
-#' \code{aic.steps = 5000}.
-#' @param ... Further arguments passed to the function \code{stepAIC}.
-#' 
+#'
+#' @param vif Logical for performing backward variable selection using the Variance-Inflation Factor
+#' (VIF). Defaults to `vif = FALSE`.
+#'
+#' @param vif.threshold Numeric value setting the maximum acceptable VIF value. Defaults to
+#' `vif.threshold = 10`.
+#'
+#' @param vif.verbose Logical for printing iteration results of backward variable selection using
+#' the VIF. Defaults to `vif.verbose = FALSE`.
+#'
+#' @param aic Logical for performing variable selection using Akaike's Information Criterion (AIC).
+#' Defaults to `aic = FALSE`.
+#'
+#' @param aic.direction Character string setting the direction of variable selection when using AIC,
+#' with options `"both"` (default), `"forward"`, and `"backward"`.
+#'
+#' @param aic.trace Logical for printing iteration results of variable selection using the AIC.
+#' Defaults to `aic.trace = FALSE`.
+#'
+#' @param aic.steps Integer value setting the maximum number of steps to be considered for variable
+#' selection using the AIC. Defaults to `aic.steps = 5000`.
+#'
+#' @param ... Further arguments passed to [MASS::stepAIC()].
+#'
 #' @details
-#' This function was devised to deal with a list of linear model formulas. The 
-#' main objective is to bring together several functions commonly used when
-#' building linear models, such as automated variable selection. In the current 
-#' implementation, variable selection can be done using \code{stepVIF} or 
-#' \code{stepAIC} or both. \code{stepVIF} is a backward variable selection
-#' procedure, while \code{stepAIC} supports backward, forward, and bidirectional
-#' variable selection. For more information about these functions, please visit 
-#' their respective help pages.
-#' 
-#' An important feature of \code{buildMS} is that it records the initial number
-#' of candidate predictor variables and observations offered to the model, and 
-#' adds this information as an attribute to the final selected model. Such 
-#' feature was included because variable selection procedures result biased 
-#' linear models (too optimistic), and the effective number of degrees of 
-#' freedom is close to the number of candidate predictor variables initially
-#' offered to the model (Harrell, 2001). With the initial number of candidate
-#' predictor variables and observations offered to the model, one can calculate
-#' penalized or adjusted measures of model performance. For models built using
-#' \code{builtMS}, this can be done using \code{statsMS}.
-#' 
-#' Some important details should be clear when using \code{buildMS}:
-#' 
-#' \enumerate{
-#' \item this function was originally devised to deal with a list of formulas, 
-#' but can also be used with a single formula;
-#' \item in the current implementation, \code{stepVIF} runs before 
-#' \code{stepAIC};
-#' \item function arguments imported from \code{stepAIC} and \code{stepVIF} 
-#' were named as in the original functions, and received a prefix (\code{aic} 
-#' or \code{vif}) to help the user identifying which function is affected by a 
-#' given argument without having to go check the documentation.
-#' }
-#' 
-#' @return A list containing the fitted linear models.
-#' 
+#' [pedometrics::buildModelSeries()] was devised to deal with a list of linear model formulas. The
+#' main objective is to bring together several functions commonly used when building linear models,
+#' such as automated variable selection. In the current implementation, variable selection can be
+#' done using [pedometrics::stepVIF()] or [MASS::stepAIC()] or both.
+#' [pedometrics::stepVIF()] is a backward variable selection procedure, while [MASS::stepAIC()]
+#' supports backward, forward, and bidirectional variable selection. For more information about
+#' these functions, please visit their respective help pages.
+#'
+#' An important feature of [pedometrics::buildModelSeries()] is that it records the initial number
+#' of candidate predictor variables and observations offered to the model, and adds this information
+#' as an attribute to the final selected model. Such feature was included because variable selection
+#' procedures result biased linear models (too optimistic), and the effective number of degrees of
+#' freedom is close to the number of candidate predictor variables initially offered to the model
+#' (Harrell, 2001). With the initial number of candidate predictor variables and observations
+#' offered to the model, one can calculate penalized or adjusted measures of model performance. For
+#' models built using [pedometrics::buildModelSeries()], this can be done using
+#' [pedometrics::statsModelSeries()].
+#'
+#' Some important details should be clear when using [pedometrics::buildModelSeries()]:
+#'
+#' * this function was originally devised to deal with a list of formulas, but can also be used with
+#'   a single formula;
+#' * in the current implementation, [pedometrics::stepVIF()] runs before [MASS::stepAIC()];
+#' * function arguments imported from [MASS::stepAIC()] and [pedometrics::stepVIF()] were named as
+#'   in the original functions, and received a prefix (`aic` or `vif`) to help the user identifying
+#'   which function is affected by a given argument without having to go check the documentation.
+#'
+#' @return
+#' A list containing the fitted linear models.
+#'
 #' @references
-#' Harrell, F. E. (2001) \emph{Regression modelling strategies: with 
-#' applications to linear models, logistic regression, and survival analysis.}
-#' First edition. New York: Springer.
-#' 
-#' Venables, W. N. and Ripley, B. D. (2002) \emph{Modern applied statistics 
-#' with S.} Fourth edition. New York: Springer.
+#' Harrell, F. E. (2001) _Regression modelling strategies: with applications to linear models,
+#' logistic regression, and survival analysis._ First edition. New York: Springer.
+#'
+#' Venables, W. N. and Ripley, B. D. (2002) _Modern applied statistics with S._ Fourth edition.
+#' New York: Springer.
+#'
+#' A. Samuel-Rosa, G. B. M. Heuvelink, G. de Mattos Vasques, and L. H. C. dos Anjos, Do more
+#' detailed environmental covariates deliver more accurate soil maps?, _Geoderma_, vol. 243–244,
+#' pp. 214–227, May 2015, doi: 10.1016/j.geoderma.2014.12.017.
 #' 
 #' @author Alessandro Samuel-Rosa \email{alessandrosamuelrosa@@gmail.com}
+#'
+#' @section TODO:
+#' Add option to set the order in which [MASS::stepAIC()] and [pedometrics::stepVIF()] are run.
 #' 
-#' @section TODO: Add option to set the order in which \code{stepAIC} and
-#' \code{stepVIF} are run.
-#' 
-#' @seealso \code{\link[MASS]{stepAIC}}, \code{\link[pedometrics]{stepVIF}},
-#' \code{\link[pedometrics]{statsMS}}.
-#' @export
+#' @section Dependencies:
+#' The __MASS__ package, provider of support functions and datasets for Venables and Ripley's Modern
+#' Applied Statistics with S, is required for [pedometrics::buildModelSeries()] to work. The
+#' development version of the __MASS__ package is available on
+#' <https://www.stats.ox.ac.uk/pub/MASS4/> while its old versions are available on the CRAN archive
+#' at <https://cran.r-project.org/src/contrib/Archive/MASS/>.
+#'
+#' @seealso [pedometrics::stepVIF()], [pedometrics::statsMS()]
+#'
 #' @examples
-#' \dontrun{
-#' # based on the second example of function stepAIC
-#' require(MASS)
-#' cpus1 <- cpus
-#' for(v in names(cpus)[2:7])
-#'   cpus1[[v]] <- cut(cpus[[v]], unique(stats::quantile(cpus[[v]])),
-#'                     include.lowest = TRUE)
-#' cpus0 <- cpus1[, 2:8]  # excludes names, authors' predictions
-#' cpus.samp <- sample(1:209, 100)
-#' cpus.form <- list(formula(log10(perf) ~ syct + mmin + mmax + cach + chmin +
-#'                   chmax + perf),
-#'                   formula(log10(perf) ~ syct + mmin + cach + chmin + chmax),
-#'                   formula(log10(perf) ~ mmax + cach + chmin + chmax + perf))
-#' data <- cpus1[cpus.samp,2:8]
-#' cpus.ms <- buildMS(cpus.form, data, vif = TRUE, aic = TRUE)
+#' if (interactive()) {
+#'   # based on the second example of MASS::stepAIC()
+#'   library("MASS")
+#'   cpus1 <- cpus
+#'   for(v in names(cpus)[2:7])
+#'     cpus1[[v]] <- cut(cpus[[v]], unique(stats::quantile(cpus[[v]])),
+#'                       include.lowest = TRUE)
+#'   cpus0 <- cpus1[, 2:8]  # excludes names, authors' predictions
+#'   cpus.samp <- sample(1:209, 100)
+#'   cpus.form <- list(formula(log10(perf) ~ syct + mmin + mmax + cach + chmin +
+#'                     chmax + perf),
+#'                     formula(log10(perf) ~ syct + mmin + cach + chmin + chmax),
+#'                     formula(log10(perf) ~ mmax + cach + chmin + chmax + perf))
+#'   data <- cpus1[cpus.samp,2:8]
+#'   cpus.ms <- buildModelSeries(cpus.form, data, vif = TRUE, aic = TRUE)
 #' }
-#' @keywords iteration models
-#' 
-# FUNCTION #####################################################################
-buildMS <- 
-  function (formula, data,
-            vif = FALSE, vif.threshold = 10, vif.verbose = FALSE,
-            aic = FALSE, aic.direction = "both", aic.trace = FALSE,
-            aic.steps = 5000, ...) {
-    
-    # Check if suggested packages are installed
-    pkg <- c("MASS", "pbapply")
-    id <- !sapply(pkg, requireNamespace, quietly = TRUE)
-    if (any(id)) {
-      pkg <- paste(pkg[which(id)], collapse = " ")
-      stop(paste("Package(s) needed for this function to work but not",
-                 "installed: ", pkg, sep = ""), call. = FALSE)
-    }
-    
-    # check arguments ##########################################################
+#' @aliases buildMS buildModelSeries
+# FUNCTION #########################################################################################
+#' @export
+#' @rdname buildModelSeries
+buildModelSeries <-
+  function(formula, data, vif = FALSE, vif.threshold = 10, vif.verbose = FALSE, aic = FALSE,
+          aic.direction = "both", aic.trace = FALSE, aic.steps = 5000, ...) {
+    # check if suggested packages are installed
+    if (!requireNamespace("MASS")) stop("MASS package is missing")
+    # check arguments
     if (missing(formula)) {
-      stop("<formula> is a mandatory argument")
+      stop("'formula' is a mandatory argument")
     }
-    if (class(formula) != "list") {
+    if (!inherits(formula, "list")) {
       formula <- list(formula)
     }
     if (missing(data)) {
-      stop("<data> is a mandatory argument")
+      stop("'data' is a mandatory argument")
     }
-    if (class(data) != "data.frame") {
+    if (!inherits(data, "data.frame")) {
       data <- as.data.frame(data)
     }
-    
-    # lm()
-    print("fitting linear model using ols")
-    model <- pbapply::pblapply(formula, function (X) stats::lm(X, data))
+    # stats::lm
+    print("fitting multiple linear regression model using OLS")
+    model <- lapply(formula, function(X) stats::lm(X, data))
     # get the initial number of candidate predictors and observations
-    p <- sapply(model, function (X) dim(stats::model.matrix(X))[2])
-    n <- sapply(model, function (X) dim(stats::model.matrix(X))[1])
-    
-    # stepVIF()
+    p <- sapply(model, function(X) dim(stats::model.matrix(X))[2])
+    n <- sapply(model, function(X) dim(stats::model.matrix(X))[1])
+    # pedometrics::stepVIF
     if (vif) {
-      print("backward variable selection using VIF")
-      model <- pbapply::pblapply(model, function (X)
-        stepVIF(X, threshold = vif.threshold, verbose = vif.verbose))
+      print("backward predictor variable selection using VIF")
+      model <- lapply(model, function(X) {
+        stepVIF(X, threshold = vif.threshold, verbose = vif.verbose)
+      })
     }
-    
-    # stepAIC()
+    # MASS::stepAIC
     if (aic) {
-      print(paste(aic.direction, " variable selection using AIC", sep = ""))
-      model <- pbapply::pblapply(model, function (X) 
-        MASS::stepAIC(X, direction = aic.direction, steps = aic.steps, 
-                      trace = aic.trace, ...))
+      print_aic <- ifelse(aic.direction == "both", "both way", aic.direction)
+      print_out <- paste0(print_aic, " predictor variable selection using AIC")
+      print(print_out)
+      model <- lapply(model, function(X) {
+        MASS::stepAIC(X, direction = aic.direction, steps = aic.steps, trace = aic.trace, ...)
+      })
     }
-    
     # Prepare output - add attributes to the final model
     a <- lapply(model, attributes)
-    for (i in 1:length(a)) {
+    for (i in seq_along(a)) {
       a[[i]]$p <- p[i]
     }
-    for (i in 1:length(a)) {
+    for (i in seq_along(a)) {
       a[[i]]$n <- n[i]
     }
-    for (i in 1:length(model)) {
+    for (i in seq_along(model)) {
       attributes(model[[i]]) <- a[[i]]
     }
     return(model)
   }
-# End!
+#' @export
+#' @rdname buildModelSeries
+buildMS <- buildModelSeries

@@ -13,40 +13,39 @@ cramer(x)
 A matrix with the Cramer's V between the categorical variables.
 }
 \description{
-Compute the Cramer's V, a descriptive statistic that measures the
-association between categorical variables.
+Compute the Cramer's V, a descriptive statistic that measures the association between categorical
+variables.
 }
 \details{
 Any integer variable is internally converted to a factor.
 }
 \note{
-The original code is available at \url{http://sas-and-r.blogspot.nl/},
-Example 8.39: calculating Cramer's V, posted by Ken Kleinman on Friday, June
-3, 2011. As such, Ken Kleinman \email{Ken_Kleinman@hms.harvard.edu} is
-entitled a \sQuote{contributor} to the R-package \pkg{pedometrics}.
-
-The function \code{bigtabulate} used to compute the chi-squared test is the
-main bottleneck in the current version of \code{cramer}. Ideally it will be
-implemented in C++.
+The original code is available at \url{https://sas-and-r.blogspot.com/}, Example 8.39:
+calculating Cramer's V, posted by Ken Kleinman on Friday, June 3, 2011. As such, Ken Kleinman
+\email{Ken_Kleinman@hms.harvard.edu} is entitled a \sQuote{contributor} to the R-package
+\strong{pedometrics}.
 }
+\section{Reverse dependencies}{
+
+The \strong{spsann} package, provider of methods for the optimization of sample configurations using
+spatial simulated annealing in R, requires \code{\link[=cramer]{cramer()}} for some of its functions to
+work. The development version of the \strong{spsann} package is available on
+\url{https://github.com/Laboratorio-de-Pedometria/spsann-package}.
+}
+
 \examples{
-\dontrun{
-data <- read.csv("http://www.math.smith.edu/r/data/help.csv")
-data <- data[, c("female", "homeless", "racegrp")]
-str(data)
-test <- cramer(data)
-test
+if (interactive()) {
+  data(meuse, package = "sp")
+  str(meuse)
+  test <- cramer(meuse[, c("ffreq", "soil", "lime", "landuse")])
 }
 }
 \references{
-Cramér, H. \emph{Mathematical methods of statistics}. Princeton: Princeton
-University Press, p. 575, 1946.
+Cramér, H. \emph{Mathematical methods of statistics}. Princeton: Princeton University Press, p. 575,
+1946.
 
-Everitt, B. S. \emph{The Cambridge dictionary of statistics}. Cambridge:
-Cambridge University Press, p. 432, 2006.
-}
-\seealso{
-\code{\link[vcd]{assocstats}}
+Everitt, B. S. \emph{The Cambridge dictionary of statistics}. Cambridge: Cambridge University Press,
+p. 432, 2006.
 }
 \author{
 Alessandro Samuel-Rosa \email{alessandrosamuelrosa@gmail.com}

@@ -2,46 +2,52 @@
 % Please edit documentation in R/bbox2sp.R
 \name{bbox2sp}
 \alias{bbox2sp}
-\title{Create Spatial object from a bounding box}
+\title{Create a Spatial* object from a bounding box}
 \usage{
 bbox2sp(obj, sp = "SpatialPolygons", keep.crs = TRUE)
 }
 \arguments{
 \item{obj}{Object of class Spatial*.}
 
-\item{sp}{Class of the resulting object. Available options are
-\code{"SpatialPoints"}, \code{"SpatialPointsDataFrame"},
-\code{"SpatialPolygons"} and \code{"SpatialPolygonsDataFrame"}.}
+\item{sp}{Class of the resulting object with options \code{"SpatialPolygons"} (default),
+\code{"SpatialPoints"}, \code{"SpatialPointsDataFrame"}, and \code{"SpatialPolygonsDataFrame"}.}
 
-\item{keep.crs}{Logical for assigning the same coordinate reference system
-to the resulting Spatial* object.}
+\item{keep.crs}{Logical for assigning the same coordinate reference system to the resulting
+Spatial* object. Defaults to \code{keep.crs = TRUE}.}
 }
 \value{
 An object of class SpatialPoints* or SpatialPolygons*.
 }
 \description{
-This function takes the bounding box of a Spatial* object and creates a
-SpatialPoints* or SpatialPolygons* object from it.
+Take the bounding box of a Spatial* object and create a SpatialPoints* or SpatialPolygons* object
+from it.
 }
 \note{
-Some of the solutions used to build this function were found in the
-source code of the R-package \pkg{intamapInteractive}. As such, the authors
-of that package, Edzer Pebesma \email{edzer.pebesma@uni-muenster.de} and
-Jon Skoien \email{jon.skoien@gmail.com}, are entitled
-\sQuote{contributors} to the R-package \pkg{pedometrics}.
+Some of the solutions used to build this function were found in the source code of the
+R-package \strong{intamapInteractive}. As such, the authors of that package, Edzer Pebesma
+\email{edzer.pebesma@uni-muenster.de} and Jon Skoien \email{jon.skoien@gmail.com}, are entitled
+\sQuote{contributors} to the R-package \strong{pedometrics}.
 }
+\section{Dependencies}{
+
+The \strong{sp} package, provider of classes and methods for spatial data in R, is required for
+\code{\link[=bbox2sp]{bbox2sp()}} to work. The development version of the \strong{sp} package is available on
+\url{https://github.com/edzer/sp/} while its old versions are available on the CRAN archive at
+\url{https://cran.r-project.org/src/contrib/Archive/sp/}.
+}
+
 \examples{
-require(sp)
-data(meuse)
-coordinates(meuse) <- ~ x + y
-bbox2sp(meuse, keep.crs = FALSE)
+if (require(sp)) {
+  data(meuse, package = "sp")
+  sp::coordinates(meuse) <- ~ x + y
+  bb <- bbox2sp(obj = meuse, keep.crs = FALSE)
+}
 }
 \references{
-Edzer Pebesma, Jon Skoien with contributions from Olivier Baume, A. Chorti, D.T. Hristopulos, S.J. Melles
-and G. Spiliopoulos (2013).
-\emph{intamapInteractive: procedures for automated interpolation - methods only to be used interactively, not}
-\emph{included in intamap package.} R package version 1.1-10.
-\url{https://CRAN.R-project.org/package=intamapInteractive}
+Edzer Pebesma, Jon Skoien with contributions from Olivier Baume, A. Chorti, D.T. Hristopulos,
+S.J. Melles and G. Spiliopoulos (2013). \emph{intamapInteractive: procedures for automated
+interpolation - methods only to be used interactively, not included in intamap package.} R
+package version 1.1-10. \url{https://CRAN.R-project.org/package=intamapInteractive}.
 }
 \author{
 Alessandro Samuel-Rosa \email{alessandrosamuelrosa@gmail.com}
