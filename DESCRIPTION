@@ -1,6 +1,6 @@
 Package: pedometrics
-Version: 0.12.0
-Date: 2022-05-28
+Version: 0.12.1
+Date: 2022-06-18
 Title: Miscellaneous Pedometric Tools
 Description: An R implementation of methods employed in the field of pedometrics, soil science
     discipline dedicated to studying the spatial, temporal, and spatio-temporal variation of soil
@@ -46,7 +46,7 @@ RoxygenNote: 7.2.0
 SystemRequirements: pandoc
 Language: en-US
 NeedsCompilation: yes
-Packaged: 2022-05-28 14:10:30 UTC; alessandrorosa
+Packaged: 2022-06-18 22:15:48 UTC; alessandrorosa
 Author: Alessandro Samuel-Rosa [aut, cre]
     (<https://orcid.org/0000-0003-0877-1320>),
   Lucia Helena Cunha dos Anjos [ths]
@@ -62,4 +62,4 @@ Author: Alessandro Samuel-Rosa [aut, cre]
   Frank Harrell Jr [ctb],
   Ruo Xu [ctb]
 Maintainer: Alessandro Samuel-Rosa <alessandrosamuelrosa@gmail.com>
-Date/Publication: 2022-05-30 07:00:09 UTC
+Date/Publication: 2022-06-19 06:10:02 UTC

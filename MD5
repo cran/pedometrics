@@ -1,6 +1,6 @@
-f72b27c82522e0ad4a0b28004e987b92 *DESCRIPTION
+73b9e326cd6128d7394f67b99df170f1 *DESCRIPTION
 b28e262b8e3c470307b6c4e86714bdf3 *NAMESPACE
-f6f7bb6b815ab643c8d8bef4a9855edd *NEWS.md
+5ce78ed74a986bf84b809f390413cda9 *NEWS.md
 6b4a76f45970fc1870ef24bbadc0dd2f *R/AAAA.R
 ce4015f6f62963bd97eda6d32ff42e75 *R/RcppExports.R
 c3c65f0d2873997adc3a054ec5a7b055 *R/adjR2.R
@@ -14,7 +14,7 @@ dc152872b05b28fabb3741b94d3600e1 *R/cramer.R
 607938f5c75418a1b3046d3f60312a3b *R/pedometrics-defunct.R
 bde93482b0c01b87a78563eb4a23b1ee *R/pedometrics.R
 bd5c5e6c83bb1c3a3ef33de628914e9e *R/plotCor.R
-a07db9145385cea20c7616f85f1ae6ab *R/plotESDA.R
+007ffd422841709deea1ba467cbfe9b9 *R/plotESDA.R
 3b41346c3ad6c9c0c9ae67dce80938ea *R/plotHD.R
 3589a52f35eb059420bbc281b0de2804 *R/plotMS.R
 3cf937c78677fa69f7aae4c21683dcaa *R/skewness.R
@@ -37,7 +37,7 @@ da99191b39e4f55066529824e95da62e *man/numint.Rd
 e2a5f8db5ab27a4a6fb41f30cee42c85 *man/pedometrics-defunct.Rd
 92864e043a4e10b1f19eea55c7558468 *man/pedometrics-package.Rd
 f475c34c7401fb89af15ce2dc025b6c9 *man/plotCor.Rd
-833e3887ed58214fc5e7f9bb7b49e896 *man/plotESDA.Rd
+a9dc19b4556697724ced55862808825e *man/plotESDA.Rd
 0f4b6381f8cdbb8ac216b91fe76246e2 *man/plotHist.Rd
 0070767c1d9bfe1cfa99e3aaced46438 *man/plotModelSeries.Rd
 1e17f6d465a639b1b54e5fa179ae26ce *man/rowMinCpp.Rd
